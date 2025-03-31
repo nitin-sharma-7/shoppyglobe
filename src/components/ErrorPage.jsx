@@ -1,0 +1,64 @@
+import React from "react";
+import { useRouteError, Link } from "react-router";
+
+function ErrorPage() {
+  const error = useRouteError();
+
+  // Get error details with fallbacks
+  const errorStatus = error?.status || "404";
+  const errorMessage = error?.statusText || error?.message || "Page not found";
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-5">
+      <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="bg-red-600 px-6 py-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white">
+            {errorStatus}
+          </h1>
+          <p className="text-red-100 mt-2">Oops! Something went wrong</p>
+        </div>
+
+        <div className="px-6 py-8">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              {errorMessage}
+            </h2>
+            <p className="text-gray-600 mb-6">
+              We couldn't find the page you're looking for.
+            </p>
+
+            {error?.stack && (
+              <div className="mt-4 mb-6">
+                <details className="text-left bg-gray-50 p-4 rounded-md">
+                  <summary className="cursor-pointer text-gray-700 font-medium mb-2">
+                    Technical Details
+                  </summary>
+                  <pre className="text-xs text-gray-600 whitespace-pre-wrap break-words">
+                    {error.stack}
+                  </pre>
+                </details>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                to="/"
+                className="px-5 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
+              >
+                Back to Home
+              </Link>
+              <button
+                onClick={() => window.history.back()}
+                className="px-5 py-3 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 transition"
+              >
+                Go Back
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ErrorPage;

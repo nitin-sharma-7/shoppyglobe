@@ -4,19 +4,20 @@ import App from "./App.jsx";
 
 //router
 import { createBrowserRouter, RouterProvider } from "react-router";
-// import ProductList from "./components/ProductList.jsx";
+
 import { lazy } from "react";
 import { Suspense } from "react";
 import ProductDetail from "./components/ProductDetail.jsx";
 import Cart from "./components/Cart.jsx";
 import Checkout from "./components/Checkout.jsx";
+import ErrorPage from "./components/Errorpage.jsx";
 
 const ProductList = lazy(() => import("./components/ProductList.jsx"));
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <>error hai bahhi</>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/:productname",
+        path: "/productdetail/:productname",
         element: <ProductDetail />,
       },
       {

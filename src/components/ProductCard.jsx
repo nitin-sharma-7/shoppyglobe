@@ -19,7 +19,11 @@ function ProductCard({ details }) {
         className="flex flex-col w-48 h-82 gap-2 justify-between overflow-hidden rounded-md p-2 shadow-md hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]
        transition-all duration-300 "
       >
-        <NavLink to={`/${title}`} state={details} title="click to show details">
+        <NavLink
+          to={`/ProductDetail/${title}`}
+          state={details}
+          title="click to show details"
+        >
           <img
             className="w-full h-32 object-cover rounded"
             src={images[0]}

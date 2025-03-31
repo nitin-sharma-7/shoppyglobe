@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useLocation } from "react-router";
-import { addCart } from "../utils/cartSlice";
+import { useLocation } from "react-router";
 
 function ProductDetail() {
   const [review, setReview] = useState(false);
   const { state } = useLocation();
-  const dispatch = useDispatch();
   let yellowStar = "⭐⭐⭐⭐⭐";
-  function handleClick(state) {
-    dispatch(addCart(state));
-  }
+  console.log(state);
 
   return (
     <>
@@ -93,17 +88,12 @@ function ProductDetail() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
-            <button
-              onClick={() => handleClick(state)}
-              className="flex-1 bg-blue-500 hover:bg-blue-800 text-white py-3 px-4 rounded-lg font-medium"
-            >
+            <button className="flex-1 bg-blue-500 hover:bg-blue-800 text-white py-3 px-4 rounded-lg font-medium">
               Add to Cart
             </button>
-            <NavLink to="/checkout" className="flex">
-              <button className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium">
-                Buy Now
-              </button>
-            </NavLink>
+            <button className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium">
+              Buy Now
+            </button>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 text-sm">
