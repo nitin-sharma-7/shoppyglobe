@@ -13,6 +13,11 @@ function ErrorPage() {
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-red-600 px-6 py-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white">
+            <img
+              className="h-20"
+              src="https://cdn-icons-gif.flaticon.com/17905/17905279.gif"
+              alt="404 image"
+            />{" "}
             {errorStatus}
           </h1>
           <p className="text-red-100 mt-2">Oops! Something went wrong</p>
@@ -45,7 +50,7 @@ function ErrorPage() {
                 to="/"
                 className="px-5 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
               >
-                Back to Home
+                To Home
               </Link>
               <button
                 onClick={() => window.history.back()}

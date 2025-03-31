@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router";
+import { useDispatch } from "react-redux";
+import { NavLink, useLocation, useParams } from "react-router";
+import { addCart } from "../utils/cartSlice";
 
 function ProductDetail() {
   const [review, setReview] = useState(false);
-  const { state } = useLocation();
+  const dispatch = useDispatch();
+  // const { state } = useLocation();
+  const location = useLocation();
+  const params = useParams();
+  let state = location.state;
+
+  // console.log(params);
   let yellowStar = "⭐⭐⭐⭐⭐";
-  console.log(state);
+  function handleClick(state) {
+    dispatch(addCart(state));
+  }
 
   return (
     <>
@@ -13,7 +23,7 @@ function ProductDetail() {
         {/* Product Images */}
         <div className="md:w-2/5">
           <div className="mb-4 flex justify-center">
-            <img src={state.images[0]} className="max-h-80 object-contain" />
+            {<img src={state.images[0]} className="max-h-80 object-contain" />}
           </div>
           <div className="flex space-x-2 overflow-x-auto">
             {state.images.map((img, index) => (
@@ -88,30 +98,47 @@ function ProductDetail() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
-            <button className="flex-1 bg-blue-500 hover:bg-blue-800 text-white py-3 px-4 rounded-lg font-medium">
+            <button
+              onClick={() => handleClick(state)}
+              className="flex-1 bg-blue-500 hover:bg-blue-800 text-white py-3 px-4 rounded-lg font-medium"
+            >
               Add to Cart
             </button>
-            <button className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium">
-              Buy Now
-            </button>
+            <NavLink to="/checkout" className="flex">
+              <button className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium">
+                Buy Now
+              </button>
+            </NavLink>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 text-sm">
             <div className="flex items-center">
               <span className="mr-2">
-                <i className="fa-solid fa-truck-fast"></i>
+                <img
+                  className="h-8"
+                  src="https://cdn-icons-gif.flaticon.com/6416/6416387.gif"
+                  alt=" delivery truck"
+                />
               </span>
               <span>{state.shippingInformation}</span>
             </div>
             <div className="flex items-center">
               <span className="mr-2">
-                <i className="fa-solid fa-rotate-left"></i>
+                <img
+                  className="h-8"
+                  src="https://cdn-icons-gif.flaticon.com/8800/8800954.gif"
+                  alt=""
+                />
               </span>
               <span>{state.returnPolicy}</span>
             </div>
             <div className="flex items-center">
               <span className="mr-2">
-                <i className="fa-solid fa-shield-halved"></i>
+                <img
+                  className="h-8"
+                  src="https://cdn-icons-gif.flaticon.com/6569/6569127.gif"
+                  alt=""
+                />
               </span>
               <span>{state.warrantyInformation}</span>
             </div>
@@ -124,32 +151,30 @@ function ProductDetail() {
         </div>
       </div>
       <div className="flex flex-col items-start pl-5">
-        {review
-          ? state.reviews.map((val, i) => (
-              <div
-                key={i}
-                className="border-b border-gray-200 pb-4 mb-4 last:border-0"
-              >
-                <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
-                  <span className="font-medium text-gray-800 mb-1 sm:mb-0">
-                    {val.name}
-                  </span>
-                  <span className="text-sm text-gray-500">{val.date}</span>
-                </div>
-                <div className="mb-2 flex items-center">
-                  <span className="text-yellow-400 mr-2">
-                    {yellowStar.slice(0, Math.floor(val.rating))}
-                  </span>
-                  <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded-full">
-                    {val.rating}
-                  </span>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>{val.reviewerName}</span>
-                </div>
-                <p className="text-gray-700 leading-relaxed">{val.comment}</p>
-              </div>
-            ))
-          : ""}
+        {state.reviews.map((val, i) => (
+          <div
+            key={i}
+            className="border-b border-gray-200 pb-4 mb-4 last:border-0"
+          >
+            <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
+              <span className="font-medium text-gray-800 mb-1 sm:mb-0">
+                {val.name}
+              </span>
+              <span className="text-sm text-gray-500">{val.date}</span>
+            </div>
+            <div className="mb-2 flex items-center">
+              <span className="text-yellow-400 mr-2">
+                {yellowStar.slice(0, Math.floor(val.rating))}
+              </span>
+              <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded-full">
+                {val.rating}
+              </span>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span>{val.reviewerName}</span>
+            </div>
+            <p className="text-gray-700 leading-relaxed">{val.comment}</p>
+          </div>
+        ))}
       </div>
     </>
   );
