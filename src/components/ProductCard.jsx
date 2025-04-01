@@ -4,7 +4,14 @@ import { addCart } from "../utils/cartSlice";
 import { NavLink } from "react-router";
 
 function ProductCard({ details }) {
-  const { title, images, rating, price, shippingInformation } = details;
+  const {
+    title,
+    images,
+    rating,
+    price,
+    shippingInformation,
+    discountPercentage,
+  } = details;
 
   let yellowStar = "⭐⭐⭐⭐⭐";
   const dispatch = useDispatch();
@@ -16,7 +23,7 @@ function ProductCard({ details }) {
   return (
     <>
       <div
-        className="flex flex-col w-48 h-82 gap-2 justify-between overflow-hidden rounded-md p-2 shadow-md hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]
+        className="flex flex-col w-[320px] sm:w-52 h-82 gap-2 justify-between overflow-hidden rounded-md p-2 shadow-md hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]
        transition-all duration-300 "
       >
         <NavLink
@@ -25,7 +32,7 @@ function ProductCard({ details }) {
           title="click to show details"
         >
           <img
-            className="w-full h-32 object-cover rounded"
+            className="w-full h-32 object-contain rounded"
             src={images[0]}
             alt={title}
           />
@@ -41,7 +48,8 @@ function ProductCard({ details }) {
                 <span> ${price}</span>
                 &nbsp; &nbsp; &nbsp;
                 <span className="line-through">
-                  {Math.floor((price * price) / 7) + 0.99}
+                  {((price * (discountPercentage + 100)) / 100).toFixed(2)}
+                  {/*  */}
                 </span>
               </div>
               <div className="font-light text-xs text-gray-600">

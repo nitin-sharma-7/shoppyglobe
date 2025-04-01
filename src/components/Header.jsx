@@ -9,9 +9,9 @@ function Header() {
     <>
       <div className="fixed w-screen  ">
         <div className="flex justify-between items-center h-16  mx-auto px-10  text-lg rounded-md shadow-md bl shadow-gray-500 bg-white ">
-          <p className="font-extrabold bg-blue-600 text-white px-3 py-1 rounded ">
+          <div className="font-extrabold bg-blue-600 text-white px-3 py-1 rounded relative ">
             ShoppyGlobe
-          </p>
+          </div>
 
           <div className="flex gap-5 items-center hover:cursor-pointer">
             <p className="hover:text-blue-600 transition-colors  relative inline-block pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">

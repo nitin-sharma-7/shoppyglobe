@@ -50,7 +50,7 @@ function ProductList() {
             value={input}
           />
         </div>
-        <div className="flex flex-wrap sm:gap-10 w-4/5 my-8 mx-auto justify-center gap-x-5 gap-y-8">
+        <div className="flex flex-wrap gap-x-12 gap-y-16 w-4/5 my-8 mx-auto justify-center  ">
           {data &&
             data.map((val) => {
               return <ProductCard key={val.id} details={val} />;

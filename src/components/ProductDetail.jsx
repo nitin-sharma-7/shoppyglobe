@@ -6,6 +6,7 @@ import { addCart } from "../utils/cartSlice";
 function ProductDetail() {
   const [review, setReview] = useState(false);
   const dispatch = useDispatch();
+
   // const { state } = useLocation();
   const location = useLocation();
   const params = useParams();
@@ -66,8 +67,8 @@ function ProductDetail() {
             &nbsp; &nbsp;
             <span className="ml-2 text-gray-500 line-through">
               $
-              {Math.round(
-                (state.price * (state.discountPercentage + 100)) / 100
+              {((state.price * (state.discountPercentage + 100)) / 100).toFixed(
+                2
               )}
             </span>{" "}
             &nbsp;
@@ -105,7 +106,10 @@ function ProductDetail() {
               Add to Cart
             </button>
             <NavLink to="/checkout" className="flex">
-              <button className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium">
+              <button
+                className="flex-1 bg-orange-500 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-medium"
+                onClick={() => handleClick(state)}
+              >
                 Buy Now
               </button>
             </NavLink>
@@ -150,32 +154,34 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start pl-5">
-        {state.reviews.map((val, i) => (
-          <div
-            key={i}
-            className="border-b border-gray-200 pb-4 mb-4 last:border-0"
-          >
-            <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
-              <span className="font-medium text-gray-800 mb-1 sm:mb-0">
-                {val.name}
-              </span>
-              <span className="text-sm text-gray-500">{val.date}</span>
+      {review && (
+        <div className="flex flex-col items-start pl-5">
+          {state.reviews.map((val, i) => (
+            <div
+              key={i}
+              className="border-b border-gray-200 pb-4 mb-4 last:border-0"
+            >
+              <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
+                <span className="font-medium text-gray-800 mb-1 sm:mb-0">
+                  {val.name}
+                </span>
+                <span className="text-sm text-gray-500">{val.date}</span>
+              </div>
+              <div className="mb-2 flex items-center">
+                <span className="text-yellow-400 mr-2">
+                  {yellowStar.slice(0, Math.floor(val.rating))}
+                </span>
+                <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded-full">
+                  {val.rating}
+                </span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{val.reviewerName}</span>
+              </div>
+              <p className="text-gray-700 leading-relaxed">{val.comment}</p>
             </div>
-            <div className="mb-2 flex items-center">
-              <span className="text-yellow-400 mr-2">
-                {yellowStar.slice(0, Math.floor(val.rating))}
-              </span>
-              <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded-full">
-                {val.rating}
-              </span>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <span>{val.reviewerName}</span>
-            </div>
-            <p className="text-gray-700 leading-relaxed">{val.comment}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }

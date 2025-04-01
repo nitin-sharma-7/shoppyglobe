@@ -31,20 +31,6 @@ function ErrorPage() {
             <p className="text-gray-600 mb-6">
               We couldn't find the page you're looking for.
             </p>
-
-            {error?.stack && (
-              <div className="mt-4 mb-6">
-                <details className="text-left bg-gray-50 p-4 rounded-md">
-                  <summary className="cursor-pointer text-gray-700 font-medium mb-2">
-                    Technical Details
-                  </summary>
-                  <pre className="text-xs text-gray-600 whitespace-pre-wrap break-words">
-                    {error.stack}
-                  </pre>
-                </details>
-              </div>
-            )}
-
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/"
