@@ -1,12 +1,53 @@
-# React + Vite
+# ShoppyGlobe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShoppyGlobe is an eCommerce web application built using Vite and React. It offers a seamless shopping experience with state management handled by Redux Toolkit, routing with React Router, and styling powered by Tailwind CSS. The app also incorporates features like shimmer effects for loading states, lazy loading with Suspense, and an error page to handle unexpected issues.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **State Management**: Uses Redux Toolkit for efficient state management.
+- **Routing**: Implemented with React Router for seamless navigation.
+- **Styling**: Built with Tailwind CSS for a responsive and modern UI.
+- **Icons**: Utilizes FontAwesome and Flaticon for visually appealing icons.
+- **Performance Optimization**:
+  - Shimmer effect for a better loading experience.
+  - Lazy loading with React Suspense to improve performance.
+- **Error Handling**: Custom error page to handle unexpected issues.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React (Vite)
+- **State Management**: Redux Toolkit
+- **Routing**: React Router
+- **Styling**: Tailwind CSS
+- **Icons**: FontAwesome, Flaticon
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/nitin-sharma-7/shoppyglobe.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd shoppyglobe
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+
+## Live Demo
+
+https://shoppyglobe-by-nitin.netlify.app/
+
+## Contributing
+
+Contributions are welcome! Feel free to fork this repository and submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
