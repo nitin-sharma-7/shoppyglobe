@@ -11,6 +11,7 @@ import ProductDetail from "./components/ProductDetail.jsx";
 import Cart from "./components/Cart.jsx";
 import Checkout from "./components/Checkout.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import ProductListShimmer from "./shimmerComponents/ProductListShimmer.jsx";
 
 const ProductList = lazy(() => import("./components/ProductList.jsx"));
 const router = createBrowserRouter([
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <Suspense fallback={<>loading... please wait.....</>}>
+          <Suspense fallback={<ProductListShimmer />}>
             <ProductList />
           </Suspense>
         ),
