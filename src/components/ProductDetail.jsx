@@ -1,40 +1,47 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useLocation, useParams } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { addCart } from "../utils/cartSlice";
 
 function ProductDetail() {
   const location = useLocation();
-  let state = location.state;
-  const [review, setReview] = useState(false);
-  const [fullImage, setFullImage] = useState(state.images[0]);
+  let state = location.state; // Retrieve product details from route state
+  const [review, setReview] = useState(false); // State to toggle review section visibility
+  const [fullImage, setFullImage] = useState(state.images[0]); // State to track the selected product image
   const dispatch = useDispatch();
 
-  // const params = useParams();
+  let yellowStar = "⭐⭐⭐⭐⭐"; // Placeholder for star ratings
 
-  // console.log(params);
-  let yellowStar = "⭐⭐⭐⭐⭐";
+  // Function to handle adding product to the cart
   function handleClick(state) {
     dispatch(addCart(state));
   }
+
+  // Function to change the main product image on thumbnail click
   function handleImage(img) {
     setFullImage(img);
   }
 
   return (
     <>
+      {/* Product Details Section */}
       <div className="flex flex-col md:flex-row gap-8 p-4 bg-white rounded-lg shadow pt-20">
         {/* Product Images */}
         <div className="md:w-2/5">
           <div className="mb-4 flex justify-center">
-            {<img src={fullImage} className="max-h-80 object-contain" />}
+            <img
+              src={fullImage}
+              className="max-h-80 object-contain"
+              alt="Product"
+            />
           </div>
+          {/* Thumbnail Image Selection */}
           <div className="flex space-x-2 overflow-x-auto">
             {state.images.map((img, index) => (
               <div
                 onClick={() => handleImage(img)}
                 key={index}
-                className={`border-2 p-1 cursor-pointer rounded `}
+                className="border-2 p-1 cursor-pointer rounded"
               >
                 <img
                   src={img}
@@ -49,10 +56,11 @@ function ProductDetail() {
         {/* Product Info */}
         <div className="md:w-3/5">
           <h1 className="text-2xl font-bold mb-2">{state.title}</h1>
+
+          {/* Product Rating & Reviews */}
           <div className="flex items-center mb-2">
             <span className="mr-2">
               {yellowStar.slice(0, Math.floor(state.rating))}
-              &nbsp;
             </span>
             <span className="text-sm text-gray-600">({state.rating})</span>
             <span className="mx-2 text-gray-300">|</span>
@@ -64,6 +72,7 @@ function ProductDetail() {
             </span>
           </div>
 
+          {/* Product Price with Discount */}
           <div className="mb-4">
             <span className="text-red-500 text-2xl font-bold">
               ${state.price}
@@ -74,13 +83,14 @@ function ProductDetail() {
               {((state.price * (state.discountPercentage + 100)) / 100).toFixed(
                 2
               )}
-            </span>{" "}
+            </span>
             &nbsp;
             <span className="ml-2 bg-red-100 text-red-700 px-2 py-1 rounded text-xs">
               {state.discountPercentage}% OFF
             </span>
           </div>
 
+          {/* Stock Availability */}
           <div className="mb-4 text-sm">
             <span
               className={`font-medium ${
@@ -91,6 +101,7 @@ function ProductDetail() {
             </span>
           </div>
 
+          {/* Product Details */}
           <div className="mb-6 text-gray-700">
             <div className="mb-2">
               <span className="font-medium">Brand:</span> {state.brand}
@@ -102,6 +113,8 @@ function ProductDetail() {
               <span className="font-medium">Category:</span> {state.category}
             </div>
           </div>
+
+          {/* Action Buttons: Add to Cart & Buy Now */}
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <button
               onClick={() => handleClick(state)}
@@ -119,13 +132,14 @@ function ProductDetail() {
             </NavLink>
           </div>
 
+          {/* Additional Product Information (Delivery, Return, Warranty) */}
           <div className="flex flex-col sm:flex-row gap-4 text-sm">
             <div className="flex items-center">
               <span className="mr-2">
                 <img
                   className="h-8"
                   src="https://cdn-icons-gif.flaticon.com/6416/6416387.gif"
-                  alt=" delivery truck"
+                  alt="delivery truck"
                 />
               </span>
               <span>{state.shippingInformation}</span>
@@ -135,7 +149,7 @@ function ProductDetail() {
                 <img
                   className="h-8"
                   src="https://cdn-icons-gif.flaticon.com/8800/8800954.gif"
-                  alt=""
+                  alt="return policy"
                 />
               </span>
               <span>{state.returnPolicy}</span>
@@ -145,19 +159,22 @@ function ProductDetail() {
                 <img
                   className="h-8"
                   src="https://cdn-icons-gif.flaticon.com/6569/6569127.gif"
-                  alt=""
+                  alt="warranty"
                 />
               </span>
               <span>{state.warrantyInformation}</span>
             </div>
           </div>
 
+          {/* Product Description */}
           <div className="mt-6 pt-6 border-t">
             <h3 className="font-medium mb-3">Product Description</h3>
             <p className="text-gray-700">{state.description}</p>
           </div>
         </div>
       </div>
+
+      {/* Product Reviews Section (Visible when `review` state is true) */}
       {review && (
         <div className="flex flex-col items-start pl-5">
           {state.reviews.map((val, i) => (

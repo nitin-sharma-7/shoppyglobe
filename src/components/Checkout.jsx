@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
+/**
+ * Checkout Component
+ * Handles the complete checkout process including customer information,
+ * payment method selection, and order summary display.
+ */
 function Checkout() {
+  // Get cart items from Redux store
   const cartItems = useSelector((store) => store.cart.items);
 
-  // Calculate cart total
+  // Calculate financial values for the order
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const shipping = 10;
-  const tax = cartTotal * 0.28; // Assuming 28% tax
-  const finalTotal = cartTotal + shipping + tax;
+  const shipping = 10; // Fixed shipping fee
+  const tax = cartTotal * 0.28; // Applying 28% tax rate
+  const finalTotal = cartTotal + shipping + tax; // Calculate final amount to be paid
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -19,14 +25,16 @@ function Checkout() {
         <h1 className="text-2xl font-bold text-gray-800 mb-8">Checkout</h1>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Customer Information Form */}
+          {/* Customer Information Form Section */}
           <div className="lg:w-3/5">
+            {/* Personal and Contact Information */}
             <div className="bg-white rounded-lg shadow p-6 mb-8">
               <h2 className="text-lg font-medium text-gray-800 mb-6">
                 Customer Information
               </h2>
 
               <form className="space-y-6">
+                {/* Name and Mobile Number Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -59,6 +67,7 @@ function Checkout() {
                   </div>
                 </div>
 
+                {/* Email Address Field */}
                 <div>
                   <label
                     htmlFor="email"
@@ -74,6 +83,7 @@ function Checkout() {
                   />
                 </div>
 
+                {/* Shipping Address Textarea */}
                 <div>
                   <label
                     htmlFor="address"
@@ -89,6 +99,7 @@ function Checkout() {
                   ></textarea>
                 </div>
 
+                {/* City, State, and ZIP Code Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label
@@ -138,12 +149,14 @@ function Checkout() {
               </form>
             </div>
 
+            {/* Payment Method Selection Section */}
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-lg font-medium text-gray-800 mb-6">
                 Payment Method
               </h2>
 
               <div className="space-y-4">
+                {/* Cash on Delivery Option */}
                 <div className="flex items-center">
                   <input
                     id="cash"
@@ -160,6 +173,7 @@ function Checkout() {
                   </label>
                 </div>
 
+                {/* Credit/Debit Card Option */}
                 <div className="flex items-center">
                   <input
                     id="card"
@@ -178,7 +192,7 @@ function Checkout() {
             </div>
           </div>
 
-          {/* Order Summary */}
+          {/* Order Summary Section */}
           <div className="lg:w-2/5">
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <div className="p-6">
@@ -186,12 +200,14 @@ function Checkout() {
                   Order Summary
                 </h2>
 
+                {/* Cart Items List with Scrollable Container */}
                 <div className="max-h-80 overflow-y-auto">
                   {cartItems.map((val) => (
                     <div
                       key={val.id}
                       className="flex items-center py-4 border-b border-gray-200 last:border-0"
                     >
+                      {/* Product Image */}
                       <div className="h-16 w-16 flex-shrink-0">
                         <img
                           src={val.images[0]}
@@ -199,6 +215,7 @@ function Checkout() {
                           className="h-full w-full object-cover rounded"
                         />
                       </div>
+                      {/* Product Details */}
                       <div className="ml-4 flex-1">
                         <h3 className="text-sm font-medium text-gray-800">
                           {val.title}
@@ -207,6 +224,7 @@ function Checkout() {
                           ${val.price} × {val.quantity}
                         </p>
                       </div>
+                      {/* Item Total Price */}
                       <div className="text-sm font-medium text-gray-800">
                         ${(val.price * val.quantity).toFixed(2)}
                       </div>
@@ -214,25 +232,30 @@ function Checkout() {
                   ))}
                 </div>
 
+                {/* Order Cost Breakdown */}
                 <div className="mt-6 border-t border-gray-200 pt-6 space-y-4">
+                  {/* Subtotal Row */}
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Subtotal</span>
                     <span className="text-sm font-medium text-gray-800">
                       ${cartTotal.toFixed(2)}
                     </span>
                   </div>
+                  {/* Shipping Fee Row */}
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Shipping</span>
                     <span className="text-sm font-medium text-gray-800">
                       ${shipping.toFixed(2)}
                     </span>
                   </div>
+                  {/* Tax Amount Row */}
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Tax</span>
                     <span className="text-sm font-medium text-gray-800">
                       ${tax.toFixed(2)}
                     </span>
                   </div>
+                  {/* Final Total Row */}
                   <div className="flex justify-between pt-4 border-t border-gray-200">
                     <span className="text-base font-medium text-gray-800">
                       Total
@@ -244,6 +267,7 @@ function Checkout() {
                 </div>
               </div>
 
+              {/* Order Placement Button */}
               <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
                 <button className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
                   Place Order

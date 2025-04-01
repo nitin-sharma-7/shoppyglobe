@@ -7,13 +7,14 @@ function Cart() {
   const dispatch = useDispatch();
 
   // Calculate cart total
+
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
   const Shipping = cartTotal ? 10 : 0;
   const tax = cartTotal * 0.28;
-
+  // Cart item quantity handlers
   function increase(val) {
     dispatch(addCart(val));
   }
