@@ -23,7 +23,7 @@ function ProductList() {
 
   return (
     <>
-      <div className="py-8 bg-gray-50 pt-10  md:pt-20">
+      <div className="py-8 bg-gray-50 pt-20  ">
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-4/5 my-4 mx-auto">
           <select
             onChange={(e) => setCat(e.target.value)}

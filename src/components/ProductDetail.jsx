@@ -4,18 +4,21 @@ import { NavLink, useLocation, useParams } from "react-router";
 import { addCart } from "../utils/cartSlice";
 
 function ProductDetail() {
+  const location = useLocation();
+  let state = location.state;
   const [review, setReview] = useState(false);
+  const [fullImage, setFullImage] = useState(state.images[0]);
   const dispatch = useDispatch();
 
-  // const { state } = useLocation();
-  const location = useLocation();
-  const params = useParams();
-  let state = location.state;
+  // const params = useParams();
 
   // console.log(params);
   let yellowStar = "⭐⭐⭐⭐⭐";
   function handleClick(state) {
     dispatch(addCart(state));
+  }
+  function handleImage(img) {
+    setFullImage(img);
   }
 
   return (
@@ -24,11 +27,12 @@ function ProductDetail() {
         {/* Product Images */}
         <div className="md:w-2/5">
           <div className="mb-4 flex justify-center">
-            {<img src={state.images[0]} className="max-h-80 object-contain" />}
+            {<img src={fullImage} className="max-h-80 object-contain" />}
           </div>
           <div className="flex space-x-2 overflow-x-auto">
             {state.images.map((img, index) => (
               <div
+                onClick={() => handleImage(img)}
                 key={index}
                 className={`border-2 p-1 cursor-pointer rounded `}
               >
