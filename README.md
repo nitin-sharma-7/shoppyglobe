@@ -23,6 +23,9 @@ ShoppyGlobe is an eCommerce web application built using Vite and React. It offer
 
 ## Installation
 
+git repo link
+https://github.com/nitin-sharma-7/shoppyglobe.git
+
 1. Clone the repository:
    ```sh
    git clone https://github.com/nitin-sharma-7/shoppyglobe.git
