@@ -43,6 +43,13 @@ ShoppyGlobe is an eCommerce web application built using Vite and React. It offer
 ## Live Demo
 
 https://shoppyglobe-by-nitin.netlify.app/
+## screenshots
+
+![Screenshot (185)](https://github.com/user-attachments/assets/1ed9ac4d-86af-48b9-9dc3-d58ef090ca26)
+![Screenshot (181)](https://github.com/user-attachments/assets/df9510c1-27d4-4181-9672-e3d960eccf85)
+![Screenshot (182)](https://github.com/user-attachments/assets/efae3e26-b677-4dee-8ac6-376211955a22)
+![Screenshot (183)](https://github.com/user-attachments/assets/48903051-b2e1-4591-b68c-9a1a6d1b257c)
+![Screenshot (184)](https://github.com/user-attachments/assets/3fa7fcdd-f211-4434-a819-dec74da505af)
 
 ## Contributing
 
