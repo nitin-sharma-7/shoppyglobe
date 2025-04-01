@@ -10,7 +10,7 @@ import { Suspense } from "react";
 import ProductDetail from "./components/ProductDetail.jsx";
 import Cart from "./components/Cart.jsx";
 import Checkout from "./components/Checkout.jsx";
-import ErrorPage from "./components/Errorpage.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 const ProductList = lazy(() => import("./components/ProductList.jsx"));
 const router = createBrowserRouter([
